@@ -4,7 +4,11 @@ const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-app.use(cors());
+const corsOptions = {
+    origin: "https://vocabularyfe-1dy7.onrender.com"
+}
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 const PORT = process.env.PORT || 4000;
