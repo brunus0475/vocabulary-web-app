@@ -91,6 +91,9 @@ function TermList() {
           <p className="lead">
             Welcome to my vocabulary app. Here you can manage your vocabulary.
           </p>
+          <p className="lead">
+            Per caricare un file Excel è necessario avere tre colonne (anche "l'intestazione"): Termine (obbligatorio), Definizione (obbligatorio), Categoria (non obbligatorio). 
+          </p>
         </div>
       </div>
       <div className="row">
