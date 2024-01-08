@@ -85,7 +85,14 @@ function TermList() {
 
   return (
     <div className="container">
-      <h1> My Vocabulary App</h1>
+      <div className="jumbotron jumbotron-fluid">
+        <div className="container">
+          <h1 className="display-4">My Vocabulary App</h1>
+          <p className="lead">
+            Welcome to my vocabulary app. Here you can manage your vocabulary.
+          </p>
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-4 d-flex flex-column align-items-start common-background">
           <div className="mt-5">
