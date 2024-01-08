@@ -92,7 +92,7 @@ function TermList() {
             Welcome to my vocabulary app. Here you can manage your vocabulary.
           </p>
           <p className="lead">
-            Per caricare un file Excel è necessario avere tre colonne (anche "l'intestazione"): Termine (obbligatorio), Definizione (obbligatorio), Categoria (non obbligatorio). 
+            Per caricare un file Excel è necessario avere tre colonne con "l'intestazione"): Termine (campo obbligatorio), Definizione (campo obbligatorio), Categoria (campo mon obbligatorio). 
           </p>
         </div>
       </div>
