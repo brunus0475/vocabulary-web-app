@@ -58,7 +58,7 @@ function TermList() {
 
         try {
           const response = await axios.post(
-            "http://localhost:4000/api/terms/add",
+            apiUrl + "/api/terms/add",
             { term, definition, category }
           );
           if (
