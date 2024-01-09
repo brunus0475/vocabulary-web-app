@@ -51,11 +51,9 @@ function TermList() {
           });
           if (response.data === "The term is already present.") {
             skippedCount++;
-            console.log(skippedCount);
             continue;
           }
           importedCount++;
-          console.log(skippedCount);
         } catch (error) {
           console.error("Error importing term: ", error);
         }
