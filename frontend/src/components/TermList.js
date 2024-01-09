@@ -22,19 +22,6 @@ function TermList() {
     fetchTerms();
   }, []);
 
-  const handleExport = () => {
-    const data = terms.map(term => ({
-      term: term.term,
-      definition: term.definition,
-      category: term.category
-    }));
-
-    const ws = XLSX.utils.json_to_sheet(data);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Vocabulary");
-    XLSX.writeFile(wb, "vocabulary.xlsx");
-  };
-
   const handleFileUpload = async event => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -57,18 +44,18 @@ function TermList() {
         const category = row[2];
 
         try {
-          const response = await axios.post(
-            apiUrl + "/api/terms/add",
-            { term, definition, category }
-          );
-          if (
-            response.status === 400 &&
-            response.data === "The term is already present in the vocabulary"
-          ) {
+          const response = await axios.post(apiUrl + "/api/terms/add", {
+            term,
+            definition,
+            category
+          });
+          if (response.data === "The term is already present.") {
             skippedCount++;
+            console.log(skippedCount);
             continue;
           }
           importedCount++;
+          console.log(skippedCount);
         } catch (error) {
           console.error("Error importing term: ", error);
         }
@@ -82,7 +69,7 @@ function TermList() {
 
     reader.readAsBinaryString(file);
   };
-
+  
   return (
     <div className="container">
       <div className="jumbotron jumbotron-fluid">
