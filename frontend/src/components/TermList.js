@@ -22,6 +22,19 @@ function TermList() {
     fetchTerms();
   }, []);
 
+    const handleExport = () => {
+    const data = terms.map(term => ({
+      term: term.term,
+      definition: term.definition,
+      category: term.category
+    }));
+
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Vocabulary");
+    XLSX.writeFile(wb, "vocabulary.xlsx");
+  };
+
   const handleFileUpload = async event => {
     const file = event.target.files[0];
     const reader = new FileReader();
