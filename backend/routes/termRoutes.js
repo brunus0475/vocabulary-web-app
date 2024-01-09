@@ -25,9 +25,8 @@ router.post("/add", async (req, res) => {
 
   const termExists = await Term.findOne({ term: req.body.term });
 
-  if (termExists) {
-    console.warn(`Attempted to add duplicate term: ${req.body.term}`);
-  } else {
+  if (!termExists) {
+    // The term does not exist, proceed to create a new term
     const term = new Term({
       term: req.body.term,
       definition: req.body.definition,
@@ -40,6 +39,10 @@ router.post("/add", async (req, res) => {
     } catch (err) {
       res.status(500).send(err);
     }
+  } else {
+    // The term already exists, send a response
+    console.warn(`Attempted to add duplicate term: ${req.body.term}`);
+    return res.send("The term is already present.");
   }
 });
 
