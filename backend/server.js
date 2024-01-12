@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 require("dotenv").config();
 const mongoose = require("mongoose");
 
@@ -9,16 +10,16 @@ const mongoose = require("mongoose");
     
 }
 */
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://vocabularyfe-1dy7.onrender.com');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
 //app.use(cors(corsOptions));
-app.use(express.json());
+
+const app = express();
+
+app.use('/api', createProxyMiddleware({
+  target: 'https://vocabularybe.onrender.com',
+  changeOrigin: true,
+}));
+
+/*app.use(express.json());*/
 
 const PORT = process.env.PORT || 4000;
 
