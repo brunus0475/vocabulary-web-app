@@ -1,25 +1,32 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const { createProxyMiddleware } = require('http-proxy-middleware');
+
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-/* const corsOptions = {
-    origin: "https://vocabularyfe-1dy7.onrender.com"
-    
-}
-*/
-//app.use(cors(corsOptions));
-
 const app = express();
 
-app.use('/api', createProxyMiddleware({
-  target: 'https://vocabularybe.onrender.com',
-  changeOrigin: true,
-}));
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://your-frontend.com"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-/*app.use(express.json());*/
+  next();
+});
 
 const PORT = process.env.PORT || 4000;
 
